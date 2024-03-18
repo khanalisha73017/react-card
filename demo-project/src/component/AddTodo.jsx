@@ -22,7 +22,7 @@ export const AddTodo = ({
   const handleAddTodo = (e) => {
     e.preventDefault();
     const { title, No_of_message } = todo;
-    console.log(title,No_of_message,"data")
+    console.log(title, No_of_message, "data");
 
     if (!title == "" || !No_of_message == "") {
       let newTodo = {
@@ -42,7 +42,6 @@ export const AddTodo = ({
   // console.log(newTodo, "newTodo");
 
   return (
-
     <ADDTODO>
       <form onSubmit={handleAddTodo}>
         <input
@@ -60,10 +59,11 @@ export const AddTodo = ({
           value={todo.No_of_message}
           onChange={handleChange}
         />
+        <br />
+       
         <input type="submit" value="ADD TODO" className="add-btn" />
       </form>
     </ADDTODO>
-   
   );
 };
 const ADDTODO = styled.div`
