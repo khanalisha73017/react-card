@@ -48,6 +48,7 @@ export const DoneAddTodo = ({ done, setDone, dones, setDones, setIsOpen }) => {
           value={done.No_of_message}
           onChange={handleChange}
         />
+        <br />
         <input type="submit" value="ADD TODO" className="add-btn" />
       </form>
     </DONE>
