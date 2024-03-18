@@ -70,8 +70,6 @@ export const Dashboard = ({
     console.log(source.droppableId, draggableId, "func");
     setNewState(destination.droppableId, task);
     console.log(destination.droppableId, task, "taskdata");
-
-    // console.log(Todos, progressTodos, reviewTodos, dones, "checkupdates");
   };
 
   function deletePreviousState(sourceDroppableId, draggableId) {
@@ -79,42 +77,42 @@ export const Dashboard = ({
     console.log("sourceDroppableId:", sourceDroppableId);
     console.log("taskId:", draggableId);
     switch (sourceDroppableId) {
-      case "1":
-        // console.log("Before deleting from Todos:", Todos);
+      case "1-todos":
+        console.log("Before deleting from Todos:", Todos);
         setTodos(removeItemById(draggableId, Todos));
-        // console.log("After deleting from Todos:", Todos);
+        console.log("After deleting from Todos:", Todos);
         break;
-      case "2":
+      case "1-progress":
         setProgressTodos(removeItemById(draggableId, progressTodos));
         break;
-      case "3":
+      case "1-review":
         setReviewTodos(removeItemById(draggableId, reviewTodos));
         break;
-      case "4":
+      case "1-done":
         setDones(removeItemById(draggableId, dones));
         break;
     }
   }
 
   function setNewState(destinationDroppableId, task) {
-    console.log(destinationDroppableId, task, "new id"); //Error Here
+    // console.log(destinationDroppableId, task, "new id"); 
     let updatedTask;
     switch (destinationDroppableId) {
-      case "1": // TO DO
+      case "1-todos": // TO DO
         updatedTask = { ...task, completed: false };
         setTodos([updatedTask, ...Todos]);
         break;
-      case "2": //Progress
-        updatedTask = { ...task, completed: true };
+      case "1-progress": //Progress
+        updatedTask = { ...task, completed: false };
         // console.log(updatedTask, "CASE 1");
         setProgressTodos([updatedTask, ...progressTodos]);
         break;
-      case "3": // IN REVIEW
-        updatedTask = { ...task, completed: false };
+      case "1-review": // IN REVIEW
+        updatedTask = { ...task, completed: true };
         setReviewTodos([updatedTask, ...reviewTodos]);
         break;
-      case "4": // done
-        updatedTask = { ...task, completed: false };
+      case "1-done": // done
+        updatedTask = { ...task, completed: true };
         setDones([updatedTask, ...dones]);
         break;
     }
@@ -132,6 +130,7 @@ export const Dashboard = ({
   // const { id } = Todos;
   console.log(id, "dash");
 
+  console.log(Todos, progressTodos, reviewTodos, dones, "checkupdates");
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <SECTION>
@@ -154,13 +153,13 @@ export const Dashboard = ({
                 </div>
                 <div className="cards">
                   {Todos.length > 0 &&
-                    Todos.map((el, index) => (
+                    Todos.map((ele, index) => (
                       <div>
                         <TodoCard
-                          key={el.id}
+                          key={ele.id}
                           Todos={Todos}
-                          {...el}
                           index={index}
+                          {...ele}
                           className="todo-card"
                         />{" "}
                       </div>
@@ -316,12 +315,12 @@ export const Dashboard = ({
                 </div>
                 <div className="add-todo">
                   {!isOpen ? (
-                    <>
+                    <div onClick={handleOpen}>
                       <span>
-                        <FiPlus onClick={handleOpen} />
+                        <FiPlus />
                       </span>
                       <span>Add a card</span>
-                    </>
+                    </div>
                   ) : (
                     <DoneAddTodo
                       done={done}
@@ -375,5 +374,6 @@ const SECTION = styled.div`
   .header {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 1rem;
   }
 `;
