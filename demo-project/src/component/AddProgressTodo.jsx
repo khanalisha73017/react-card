@@ -53,6 +53,7 @@ export const AddProgressTodo = ({
           value={progressTodo.No_of_message}
           onChange={handleChange}
         />
+        <br />
         <input type="submit" value="ADD TODO" className="add-btn" />
       </form>
     </PROGRESS>
